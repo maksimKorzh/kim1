@@ -1953,7 +1953,7 @@ uint8_t read6502(uint16_t address) {
             return (0xEA);                         // and return from subroutine with a fake NOP instruction
         }
         if (address == 0x1E65) {                   // intercept GETCH (get char from serial).
-            paper_tape = 0;                        // reset paper tape flag
+            paper_tape = 0;                        // reset paper tape flag 
             a = getch();                           // get A from serial
             if (a >= 'a' && a <= 'z')              // convert lower case chars
                a -= ('a' - 'A');                   // to upper case
@@ -2027,6 +2027,11 @@ int main() {
     write6502(0x17F7, 0xFF); // Make [Q] command
     write6502(0x17F8, 0x03); // consider 0x3FF as end address
     signal(SIGQUIT, handle_signal);
+    FILE *file = fopen("DUMP.PTP", "w");
+    fputc('>', file);
+    fclose(file);
+    //for (int i = 0x2000; i <= 0x28FF; i++) RAM_EXP[i - 0x2000] = TINY_BASIC[i - 0x2000];
+    //for (int i = 0x9548; i < 0xA032; i++) RAM_EXP[i - 0x2000] = SUPERMON[i - 0x9548];
     while (1) {
         step6502();
         refresh();

@@ -9,6 +9,10 @@ KIM-1 serial mode emulator for Linux
     0xFFFA - 0xFFFF       6 bytes ROM IRQ table
 
 # User manual
+    Quit emulator:         [Ctrl-C]
+
+    KIM-1 "RS" button:     [Ctrl-\]
+
     Select address:   0200 [SPACE]    - Go to 0x0200
 
     Modify data:      A9   [.]        - Sets value at 0x0200 to A9, advances to the next address
@@ -649,3 +653,4 @@ KIM-1 serial mode emulator for Linux
  - Timers are not emulated
  - CPU speed is not limited
  - Binary coded decimals are not supported (like in NES)
+ - Hard coded local echo
