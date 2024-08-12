@@ -1932,8 +1932,8 @@ const uint8_t IRQ[] = {
 /* FFFE */ 0x1F, 0x1C          //  IRQENT  .WORD IRQT
 };
 
-uint8_t RAM[1024];        // 0x0000-0x03FF
-uint8_t RIOT[256];        // 0x1700-0x17FF
+uint8_t RAM[0x1700];      // 0x0000-0x16FF, 5888  bytes
+uint8_t RIOT[256];        // 0x1700-0x17FF, 256   bytes
 uint8_t RAM_EXP[0xDFFA];  // 0x2000-0xFFFA, 57338 bytes
 
 uint8_t read6502(uint16_t address) {
@@ -1981,7 +1981,7 @@ uint8_t read6502(uint16_t address) {
         }
         return RIOT[address - 0x1700];             // read 6530s RIOT chips
     }
-    if (address < 0x0400) return RAM[address];     // KIM-1 RAM
+    if (address < 0x1700) return RAM[address];     // KIM-1 RAM
     return 0;                                      // skip non-existing memory
 }
 
@@ -1994,7 +1994,7 @@ void write6502(uint16_t address, uint8_t value) {
       RIOT[address - 0x1700] = value;              // 6530s RIOT chips
       return;
     }
-    if (address < 0x0400) {                        // KIM-1 RAM
+    if (address < 0x1700) {                        // KIM-1 RAM
         RAM[address] = value;
         return;
     }
