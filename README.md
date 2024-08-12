@@ -2,11 +2,11 @@
 KIM-1 serial mode emulator for Linux
 
 # Memory layout
-0x0000 - 0x16FF    5888 bytes RAM
-0x1700 - 0x17FF     256 bytes RAM 6530 RIOT chips (I/O, Timers)
-0x1800 - 0x1FFF    2048 bytes ROM KIM operating system
-0x2000 - 0xFFFA   57338 bytes RAM
-0xFFFA - 0xFFFF       6 bytes ROM IRQ table
+    0x0000 - 0x16FF    5888 bytes RAM
+    0x1700 - 0x17FF     256 bytes RAM 6530 RIOT chips (I/O, Timers)
+    0x1800 - 0x1FFF    2048 bytes ROM KIM operating system
+    0x2000 - 0xFFFA   57338 bytes RAM
+    0xFFFA - 0xFFFF       6 bytes ROM IRQ table
 
 # User manual
     Select address:   0200 [SPACE] - Go to 0x0200
