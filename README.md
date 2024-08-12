@@ -9,18 +9,18 @@ KIM-1 serial mode emulator for Linux
     0xFFFA - 0xFFFF       6 bytes ROM IRQ table
 
 # User manual
-    Select address:   0200 [SPACE] - Go to 0x0200
+    Select address:   0200 [SPACE]    - Go to 0x0200
 
-    Modify data:      A9   [.]     - Sets value at 0x0200 to A9, advances to the next address
+    Modify data:      A9   [.]        - Sets value at 0x0200 to A9, advances to the next address
 
-    Next address:          [ENTER] - advances to the next address
+    Next address:          [ENTER]    - advances to the next address
 
-    Execute program:  0200 [SPACE] - runs program at 0x0200
+    Execute program:  0200 [SPACE]    - runs program at 0x0200
                            [G]
 
-    Load file:             [L]     - load paper tape (paste to terminal)
+    Load file:             [L]        - load paper tape (paste to terminal)
     
-    Save file:        17F7 [SPACE] - list paper tape (0x0200-0x3FFF)
+    Save file:        17F7 [SPACE]    - list paper tape (0x0200-0x3FFF)
                       FF   [.]
                       17F8 [SPACE]
                       03   [.]
