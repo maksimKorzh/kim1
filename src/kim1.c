@@ -1962,6 +1962,9 @@ uint8_t read6502(uint16_t address) {
             pc = 0x1E87;                           // skip subroutine
             return (0xEA);                         // and return from subroutine with a fake NOP instruction
         }
+        if (address >= 0x1D42 && address <= 0x1A49) {
+          printw("paper tape:\n");
+        }
         if (address == 0x1C2A) {                   // intercept DETCPS
             RIOT[0x17F3-0x1700] = 1;               // just store some random bps delay on TTY in CNTH30
             RIOT[0x17F2-0x1700] = 1;               // just store some random bps delay on TTY in CNTL30
@@ -2011,10 +2014,10 @@ int main() {
     noecho();
     timeout(0);
     reset6502();
-    write6502(0x17FA, 0x00);
-    write6502(0x17FB, 0x1C);
-    write6502(0x17FE, 0x00);
-    write6502(0x17FF, 0x1C);
+    write6502(0x17FE, 0x00); // Handle BRK (LOW address byte)
+    write6502(0x17FF, 0x1C); // Handle BRK (HIGH address byte)
+    write6502(0x17F7, 0xFF); // Make [Q] command
+    write6502(0x17F8, 0x03); // consider 0x3FF as end address
     signal(SIGQUIT, handle_signal);
     while (1) {
         step6502();
