@@ -2,7 +2,7 @@
 KIM-1 serial mode emulator for Linux
 
 # KIM-1 emulator running under cool retro term
-[![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/maksimKorzh/kim1/main/KIM-1.png)]
+![IMAGE ALT TEXT HERE](https://raw.githubusercontent.com/maksimKorzh/kim1/main/KIM-1.png)
 
 # Memory layout
     0x0000 - 0x16FF    5888 bytes RAM
