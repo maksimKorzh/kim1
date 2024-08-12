@@ -1932,8 +1932,8 @@ const uint8_t IRQ[] = {
 /* FFFE */ 0x1F, 0x1C          //  IRQENT  .WORD IRQT
 };
 
-uint8_t RAM[1024]; // 0x0000-0x03FF
-uint8_t RIOT[256]; // 0x1700-0x17FF
+uint8_t RAM[1024];        // 0x0000-0x03FF
+uint8_t RIOT[256];        // 0x1700-0x17FF
 uint8_t RAM_EXP[0xDFFA];  // 0x2000-0xFFFA, 57338 bytes
 
 uint8_t read6502(uint16_t address) {
@@ -1948,6 +1948,8 @@ uint8_t read6502(uint16_t address) {
         }
         if (address == 0x1E65) {                   // intercept GETCH (get char from serial).
             a = getch();                           // get A from serial
+            if (a >= 'a' && a <= 'z')              // convert lower case chars
+               a -= ('a' - 'A');                   // to upper case
             if (a == 10) a = 13;                   // treat enter key on linux as carriage return
             if (a == 0xFF) a = 0x00;               // Arduino reads 0xFF on no key, replace it with 0
             if (a == 0) {
@@ -1984,6 +1986,10 @@ uint8_t read6502(uint16_t address) {
 }
 
 void write6502(uint16_t address, uint8_t value) {
+    if (address >= 0x2000 && address <= 0xFFF9) {  // RAM expansion
+      RAM_EXP[address - 0x2000] = value;
+      return;
+    }
     if (address >= 0x1700 && address <= 0x17FF) {  // KIM-1 6530 RIOT chips
       RIOT[address - 0x1700] = value;              // 6530s RIOT chips
       return;
