@@ -23,4 +23,4 @@ If you want engine to male move for the current side to move do:
   0200 [SPACE] [G] - engine would search the move, make it and print the board
 
 If you want to check board position after you have made the move do:
-  02F6 [SPACE] [G] - this would print current board state and side to move
+  03F6 [SPACE] [G] - this would print current board state and side to move
