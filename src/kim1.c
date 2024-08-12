@@ -2030,8 +2030,6 @@ int main() {
     FILE *file = fopen("DUMP.PTP", "w");
     fputc('>', file);
     fclose(file);
-    //for (int i = 0x2000; i <= 0x28FF; i++) RAM_EXP[i - 0x2000] = TINY_BASIC[i - 0x2000];
-    //for (int i = 0x9548; i < 0xA032; i++) RAM_EXP[i - 0x2000] = SUPERMON[i - 0x9548];
     while (1) {
         step6502();
         refresh();
