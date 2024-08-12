@@ -1,6 +1,6 @@
-===============================================================
- SUPERMON64 by Jim Butterfield (adopted and recompiled by CMK)
-===============================================================
+================================
+ 6502 Chess by Code Monkey King
+================================
  ORIGINS:
   0x0000 Board and variables
   0x0100 Evaluation
