@@ -1935,6 +1935,7 @@ const uint8_t IRQ[] = {
 uint8_t RAM[0x1700];      // 0x0000-0x16FF, 5888  bytes
 uint8_t RIOT[256];        // 0x1700-0x17FF, 256   bytes
 uint8_t RAM_EXP[0xDFFA];  // 0x2000-0xFFFA, 57338 bytes
+uint8_t paper_tape = 0;
 
 uint8_t read6502(uint16_t address) {
     if (address >= 0xFFFA && address <= 0xFFFF) return IRQ[address - 0xFFFA];
@@ -1943,15 +1944,22 @@ uint8_t read6502(uint16_t address) {
         if (address == 0x1EA0) {                   // intercept OUTCH (send char to serial)
             if (a == '\r') a = 0;                  // Don't print carriage return
             if (a >= 7) addch((char)a);            // Print char t terminal
+            if (paper_tape) {                      //
+              FILE *file = fopen("DUMP.PTP", "a"); //
+              if (a >= 7) fputc(a, file);          // Store paper tape to "DUMP.PTP"
+              fclose(file);                        //
+            }
             pc = 0x1ED3;                           // skip subroutine
             return (0xEA);                         // and return from subroutine with a fake NOP instruction
         }
         if (address == 0x1E65) {                   // intercept GETCH (get char from serial).
+            paper_tape = 0;                        // reset paper tape flag
             a = getch();                           // get A from serial
             if (a >= 'a' && a <= 'z')              // convert lower case chars
                a -= ('a' - 'A');                   // to upper case
             if (a == 10) a = 13;                   // treat enter key on linux as carriage return
             if (a == 0xFF) a = 0x00;               // Arduino reads 0xFF on no key, replace it with 0
+            if (a == 'Q') paper_tape = 1;          // set paper tape flag
             if (a == 0) {
                 pc = 0x1E60;                       // cycle through GET1 loop for character start,
                 return (0xEA);                     //  let the 6502 runs through this loop in a fake way

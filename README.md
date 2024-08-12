@@ -18,11 +18,11 @@ KIM-1 serial mode emulator for Linux
     Execute program:  0200 [SPACE]    - runs program at 0x0200
                            [G]
 
-    Load file:             [L]        - load paper tape (paste to terminal)
+    Load file:             [L]        - load paper tape (paste PTP to terminal)
     
     Save file:        17F7 [SPACE]    - list paper tape (0x0200-0x3FFF)
-                      FF   [.]
-                      17F8 [SPACE]
+                      FF   [.]          this would also write paper tape
+                      17F8 [SPACE]      to the file "DUMP.PTP"
                       03   [.]
                       0200 [SPACE]
                            [Q]
