@@ -1,0 +1,31 @@
+|====================================|====================| 
+| OPCODE    ADDRESSING MODE    GROUP | BRANCH    FLAGS    |
+|====================================|====================|
+|    aaa                bbb       cc | BPL $10   CLC  $18 |
+|------------------------------------| BMI $30   SEC  $38 |
+|ORA 000  (zero page,X) 000       01 | BVC $50   CLI  $58 | 
+|AND 001      zero page 001       01 | BVS $70   SEI  $78 | 
+|EOR 010     #immediate 010       01 | BCC $90   CLV  $B8 | 
+|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 | 
+|STA 100  (zero page),Y 100       01 | BNE $D0   SED  $F8 | 
+|LDA 101    zero page,X 101       01 | BEQ $F0            | 
+|CMP 110     absolute,Y 110       01 |====================|
+|SBC 111     absolute,X 111       01 | TRANSFER  INCRMNT  |
+|------------------------------------|====================|
+|ASL 000     #immediate 000       10 | TAX $AA   INY $C8  |
+|ROL 001      zero page 001       10 | TXA $8A   INX $E8  |
+|LSR 010    accumulator 010       11 | TAY $A8   DEY $88  |
+|ROR 011       absolute 011       10 | TYA $98   DEX $CA  |
+|STX 100    zero page,Y 101       10 | TXS $9A            |
+|LDX 101     absolute,Y 111       10 | TSX $BA            |
+|DEC 110                             |====================|
+|INC 111                             | STACK     JUMPS    |
+|------------------------------------|====================|
+|BIT 001     #immediate 000       00 | PHP $08   JMP  $4C |
+|STY 100      zero page 001       00 | PLP $28   JSR  $20 |
+|LDY 101       absolute 011       00 | PHA $48   RTI  $40 |
+|CPY 110    zero page,X 101       00 | PLA $68   RTS  $60 |
+|CPX 111     absolute,X 111          |         ()JMP  $6C |
+|====================================|--------------------|
+|      6502 OPCODES ENCODING         | BRK $00   NOP  $EA |
+|====================================|--------------------|
