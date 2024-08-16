@@ -6,7 +6,7 @@
 |ORA 000  (zero page,X) 000       01 | BVC $50   CLI  $58 |     $FFFA - $FFFF       6 bytes ROM IRQ table
 |AND 001      zero page 001       01 | BVS $70   SEI  $78 |                                                                  
 |EOR 010     #immediate 010       01 | BCC $90   CLV  $B8 |     # KIM ROM I/O routines
-|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 |     OUTSP    $1E9E    Output space to TTY            
+|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 |     OUTSP    $1E9E    Output space to TTY ($1E2F New line)
 |STA 100  (zero page),Y 100       01 | BNE $D0   SED  $F8 |     OUTCH    $1EA0    Output A to TTY as char                     
 |LDA 101    zero page,X 101       01 | BEQ $F0            |     GETCH    $1E5A    Get char from TTY to A                      
 |CMP 110     absolute,Y 110       01 |====================|     PRTBYT   $1E3B    Print HEX byte as 2 ASCII chars             
