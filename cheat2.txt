@@ -1,0 +1,92 @@
+|====================================|====================|    ==============================================
+| OPCODE    ADDRESSING MODE    GROUP | BRANCH    FLAGS    |                     Print 6 digits                
+|====================================|====================|    ==============================================
+|    aaa                bbb       cc | BPL $10   CLC  $18 |    0200 A9 00    START  LDA #0      zero into A
+|------------------------------------| BMI $30   SEC  $38 |    0202 85 FB           STA POINTH  first 2
+|ORA 000  (zero page,X) 000       01 | BVC $50   CLI  $58 |    0204 85 FA           STA POINTL  next 2
+|AND 001      zero page 001       01 | BVS $70   SEI  $78 |    0206 85 F9           STA INH     last 2
+|EOR 010     #immediate 010       01 | BCC $90   CLV  $B8 |    0208 20 1F 1F  LOOP  JSR SCANDS  light up!
+|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 |    020B 4C 08 02        JMP LOOP    do it again
+|STA 100  (zero page),Y 100       01 | BNE $D0   SED  $F8 |    
+|LDA 101    zero page,X 101       01 | BEQ $F0            |    ==============================================
+|CMP 110     absolute,Y 110       01 |====================|                      Echo keypad
+|SBC 111     absolute,X 111       01 | TRANSFER  INCRMNT  |    ==============================================
+|------------------------------------|====================|    0200 D8       START CLD         clr dc mode
+|ASL 000     #immediate 000       10 | TAX $AA   INY $C8  |    0201 A9 00          LDA #0      zero into A
+|ROL 001      zero page 001       10 | TXA $8A   INX $E8  |    0203 85 FB    STORE STA POINTH
+|LSR 010    accumulator 010       10 | TAY $A8   DEY $88  |    0205 85 FA          STA POINTL
+|ROR 011       absolute 011       10 | TYA $98   DEX $CA  |    0207 85 F9          STA INH
+|STX 100    zero page,Y 101       10 | TXS $9A            |    0209 20 1F 1F       JSR SCANDS  light up
+|LDX 101     absolute,Y 111       10 | TSX $BA            |    020C 20 6A 1F       JSR GETKEY  test keys
+|DEC 110                             |====================|    020F 4C 03 02       JMP STORE               
+|INC 111                             | STACK     JUMPS    |                                                
+|------------------------------------|====================|    ==============================================
+|BIT 001     #immediate 000       00 | PHP $08   JMP  $4C |     Machine Context (saved/restored by ST/GO):                                                                                      
+|STY 100      zero page 001       00 | PLP $28   JSR  $20 |    ==============================================                                                                    
+|LDY 101       absolute 011       00 | PHA $48   RTI  $40 |                             N - Negative flag
+|CPY 110    zero page,X 101       00 | PLA $68   RTS  $60 |    00EF PC low              V - Overflow flag                  
+|CPX 111     absolute,X 111          |         ()JMP  $6C |    00F0 PC high             - - Expansion flag                 
+|====================================|--------------------|    00F1 Status Register     B - Break flag                     
+|      6502 OPCODES ENCODING         | BRK $00   NOP  $EA |    00F2 Stack Pointer       D - Decimal mode flag              
+|====================================|--------------------|    00F3 A                   I - Interrupt flag                 
+|        KIM-1 I/O ROUTINES          |                    |    00F4 Y                   Z - Zero flag                      
+|=========================================================|    00F5 X                   C - Carry flag                     
+                                                                                           
+                                                                
+                                                                
+                                                                
+                                                                
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                                         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+       

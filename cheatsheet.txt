@@ -1,33 +1,33 @@
-|====================================|====================|     # KIM memory layout
-| OPCODE    ADDRESSING MODE    GROUP | BRANCH    FLAGS    |     $0000 - $16FF    5888 bytes RAM
-|====================================|====================|     $1700 - $17FF     256 bytes RAM 6530 RIOT chips (I/O, Timers)
-|    aaa                bbb       cc | BPL $10   CLC  $18 |     $1800 - $1FFF    2048 bytes ROM KIM operating system
-|------------------------------------| BMI $30   SEC  $38 |     $2000 - $FFFA   57338 bytes RAM
-|ORA 000  (zero page,X) 000       01 | BVC $50   CLI  $58 |     $FFFA - $FFFF       6 bytes ROM IRQ table
-|AND 001      zero page 001       01 | BVS $70   SEI  $78 |                                                                  
-|EOR 010     #immediate 010       01 | BCC $90   CLV  $B8 |     # KIM ROM I/O routines
-|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 |     OUTSP    $1E9E    Output space to TTY ($1E2F New line)
-|STA 100  (zero page),Y 100       01 | BNE $D0   SED  $F8 |     OUTCH    $1EA0    Output A to TTY as char                     
-|LDA 101    zero page,X 101       01 | BEQ $F0            |     GETCH    $1E5A    Get char from TTY to A                      
-|CMP 110     absolute,Y 110       01 |====================|     PRTBYT   $1E3B    Print HEX byte as 2 ASCII chars             
-|SBC 111     absolute,X 111       01 | TRANSFER  INCRMNT  |                                                                   
-|------------------------------------|====================|     # KIM RAM addresses:                                          
-|ASL 000     #immediate 000       10 | TAX $AA   INY $C8  |     $00EF PC low                        N - Negative flag         
-|ROL 001      zero page 001       10 | TXA $8A   INX $E8  |     $00F0 PC high                       V - Overflow flag        
-|LSR 010    accumulator 010       10 | TAY $A8   DEY $88  |     $00F1 Status Register (NV-BDIZC)    - - Expansion flag        
-|ROR 011       absolute 011       10 | TYA $98   DEX $CA  |     $00F2 Stack Pointer                 B - Break flag          
-|STX 100    zero page,Y 101       10 | TXS $9A            |     $00F3 A                             D - Decimal mode flag     
-|LDX 101     absolute,Y 111       10 | TSX $BA            |     $00F4 Y                             I - Interrupt flag      
-|DEC 110                             |====================|     $00F5 X                             Z - Zero flag           
-|INC 111                             | STACK     JUMPS    |     $17F7 Paper tape end address low    C - Carry flag          
-|------------------------------------|====================|     $17F8 Paper tape end address high                           
-|BIT 001     #immediate 000       00 | PHP $08   JMP  $4C |                                                                  
-|STY 100      zero page 001       00 | PLP $28   JSR  $20 |     # KIM user manual                                             
-|LDY 101       absolute 011       00 | PHA $48   RTI  $40 |     Quit emulator:         [Ctrl-C]                               
-|CPY 110    zero page,X 101       00 | PLA $68   RTS  $60 |     KIM-1 "RS" button:     [Ctrl-\]                               
-|CPX 111     absolute,X 111          |         ()JMP  $6C |     Select address:   0200 [SPACE]    - Go to 0x0200
-|====================================|--------------------|     Modify data:      A9   [.]        - Sets value at 0x0200 to A9
-|      6502 OPCODES ENCODING         | BRK $00   NOP  $EA |     Next address:          [ENTER]    - advances to the next address
-|====================================|--------------------|     Execute program:  0200 [SPACE][G] - runs program at 0x0200
-|        KIM-1 I/O ROUTINES          |                    |     Load file:             [L]        - load paper tape
-|=========================================================|     Save file:             [Q]        - save paper tape
+|====================================|====================|    # KIM memory layout
+| OPCODE    ADDRESSING MODE    GROUP | BRANCH    FLAGS    |    $0000 - $16FF    5888 bytes RAM
+|====================================|====================|    $1700 - $17FF     256 bytes RAM 6530 RIOT chips (I/O, Timers)
+|    aaa                bbb       cc | BPL $10   CLC  $18 |    $1800 - $1FFF    2048 bytes ROM KIM operating system
+|------------------------------------| BMI $30   SEC  $38 |    $2000 - $FFFA   57338 bytes RAM
+|ORA 000  (zero page,X) 000       01 | BVC $50   CLI  $58 |    $FFFA - $FFFF       6 bytes ROM IRQ table
+|AND 001      zero page 001       01 | BVS $70   SEI  $78 |                                                                 
+|EOR 010     #immediate 010       01 | BCC $90   CLV  $B8 |    # KIM ROM I/O routines
+|ADC 011       absolute 011       01 | BCS $B0   CLD  $D8 |    OUTSP    $1E9E    Output space to TTY ($1E2F New line)
+|STA 100  (zero page),Y 100       01 | BNE $D0   SED  $F8 |    OUTCH    $1EA0    Output A to TTY as char                     
+|LDA 101    zero page,X 101       01 | BEQ $F0            |    GETCH    $1E5A    Get char from TTY to A                      
+|CMP 110     absolute,Y 110       01 |====================|    PRTBYT   $1E3B    Print HEX byte as 2 ASCII chars             
+|SBC 111     absolute,X 111       01 | TRANSFER  INCRMNT  |                                                                  
+|------------------------------------|====================|    # KIM RAM addresses:                                          
+|ASL 000     #immediate 000       10 | TAX $AA   INY $C8  |    $00EF PC low                        N - Negative flag         
+|ROL 001      zero page 001       10 | TXA $8A   INX $E8  |    $00F0 PC high                       V - Overflow flag        
+|LSR 010    accumulator 010       10 | TAY $A8   DEY $88  |    $00F1 Status Register (NV-BDIZC)    - - Expansion flag        
+|ROR 011       absolute 011       10 | TYA $98   DEX $CA  |    $00F2 Stack Pointer                 B - Break flag          
+|STX 100    zero page,Y 101       10 | TXS $9A            |    $00F3 A                             D - Decimal mode flag     
+|LDX 101     absolute,Y 111       10 | TSX $BA            |    $00F4 Y                             I - Interrupt flag      
+|DEC 110                             |====================|    $00F5 X                             Z - Zero flag           
+|INC 111                             | STACK     JUMPS    |    $17F7 Paper tape end address low    C - Carry flag          
+|------------------------------------|====================|    $17F8 Paper tape end address high                           
+|BIT 001     #immediate 000       00 | PHP $08   JMP  $4C |                                                                 
+|STY 100      zero page 001       00 | PLP $28   JSR  $20 |    # KIM user manual                                             
+|LDY 101       absolute 011       00 | PHA $48   RTI  $40 |    Quit emulator:         [Ctrl-C]                               
+|CPY 110    zero page,X 101       00 | PLA $68   RTS  $60 |    KIM-1 "RS" button:     [Ctrl-\]                               
+|CPX 111     absolute,X 111          |         ()JMP  $6C |    Select address:   0200 [SPACE]    - Go to 0x0200
+|====================================|--------------------|    Modify data:      A9   [.]        - Sets value at 0x0200 to A9
+|      6502 OPCODES ENCODING         | BRK $00   NOP  $EA |    Next address:          [ENTER]    - advances to the next address
+|====================================|--------------------|    Execute program:  0200 [SPACE][G] - runs program at 0x0200
+|        KIM-1 I/O ROUTINES          |                    |    Load file:             [L]        - load paper tape
+|=========================================================|    Save file:             [Q]        - save paper tape
