@@ -27,7 +27,7 @@
 |CPY 110    zero page,X 101       00 | PLA $68   RTS  $60 |    KIM-1 "RS" button:     [Ctrl-\]                               
 |CPX 111     absolute,X 111          |         ()JMP  $6C |    Select address:   0200 [SPACE]    - Go to 0x0200
 |====================================|--------------------|    Modify data:      A9   [.]        - Sets value at 0x0200 to A9
-|      6502 OPCODES ENCODING         | BRK $00   NOP  $EA |    Next address:          [ENTER]    - advances to the next address
-|====================================|--------------------|    Execute program:  0200 [SPACE][G] - runs program at 0x0200
-|        KIM-1 I/O ROUTINES          |                    |    Load file:             [L]        - load paper tape
+|                                    | BRK $00   NOP  $EA |    Next address:          [ENTER]    - advances to the next address
+|        6502 OPCODES ENCODING       |--------------------|    Execute program:  0200 [SPACE][G] - runs program at 0x0200
+|                                    |                    |    Load file:             [L]        - load paper tape
 |=========================================================|    Save file:             [Q]        - save paper tape
